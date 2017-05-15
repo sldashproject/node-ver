@@ -1,6 +1,431 @@
 <html>
-    <head></head>
+    <head>
+        <title>Dashboard Project</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
     <body>
-        <h1>Test Project</h1>
+        <input type="checkbox" id="data1" checked="checked"><font color="#FFFFFF"><SPAN STYLE="background-color:#808080;" id="trans1">data1</SPAN></font><br>
+        <input type="checkbox" id="data2" checked="checked"><font color="#FFFFFF"><SPAN STYLE="background-color:#808080;" id="trans2">data2</SPAN></font><br>
+        <input type="checkbox" id="data3" checked="checked"><font color="#FFFFFF"><SPAN STYLE="background-color:#808080;" id="trans3">data3</SPAN></font><br>
+        <input type="checkbox" id="data4" checked="checked"><font color="#FFFFFF"><SPAN STYLE="background-color:#808080;" id="trans4">data4</SPAN></font><br>
+        <input type="checkbox" id="data5" checked="checked"><font color="#FFFFFF"><SPAN STYLE="background-color:#808080;" id="trans5">data5</SPAN></font><br>
+        <input type="checkbox" id="data6" checked="checked"><font color="#FFFFFF"><SPAN STYLE="background-color:#808080;" id="trans6">data6</SPAN></font>
+    
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+        </div>
+        
+        <script>
+            $(document).ready(function () {
+                Highcharts.setOptions({
+                    global: {
+                        useUTC: false
+                    }
+                });
+
+                var chart = Highcharts.chart('container', {
+                    chart: {
+                        type: 'spline',
+                        animation: Highcharts.svg, 
+                        marginRight: 10,
+                        events: {
+                            load: function () {
+        
+                                // set up the updating of the chart each second
+                                var series0 = this.series[0];
+                                var series1 = this.series[1];
+                                var series2 = this.series[2];
+                                var series3 = this.series[3];
+                                var series4 = this.series[4];
+                                var series5 = this.series[5];
+                                
+                                setInterval(function () {
+                                    var a = (new Date()).getTime(), // current time
+                                        //b = Math.floor((Math.random() * (100 - 0 + 1)) + 1);
+                                        b = Math.floor((Math.random() * (100 - 80)+ 80));
+                                    series0.addPoint([a, b], true, true);
+                                    
+                                    var c = (new Date()).getTime(), // current time
+                                        d = Math.floor((Math.random() * (90 - 70)+ 70));
+                                    series1.addPoint([c, d], true, true);
+                                    
+                                    var e = (new Date()).getTime(), // current time
+                                        f = Math.floor((Math.random() * (80 - 60) + 60));
+                                    series2.addPoint([e, f], true, true);
+                                    
+                                    var g = (new Date()).getTime(), // current time
+                                        h = Math.floor((Math.random() * (70 - 50) + 50));
+                                    series3.addPoint([g, h], true, true);
+                                    
+                                    var i = (new Date()).getTime(), // current time
+                                        j = Math.floor((Math.random() * (60 - 40) + 40));
+                                    series4.addPoint([i, j], true, true);
+                                    
+                                    var k = (new Date()).getTime(), // current time
+                                        l = Math.floor((Math.random() * (50 - 30) + 30));
+                                    series5.addPoint([k, l], true, true);
+                                }, 1000);
+                            }
+                        }
+                    },
+                    title: {
+                        text: 'Live random data'
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        tickPixelInterval: 1500
+                    },
+                    yAxis: {
+                    		min: 0,
+                        max: 100,
+                        title: {
+                            text: 'Value'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        formatter: function () {
+                            return '<b>' + this.series.name + '</b><br/>' +
+                                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                Highcharts.numberFormat(this.y, 2);
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                    		series: {
+                        		marker: {
+                            		enabled: false
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Random data0',
+                        selected: true,
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+        
+                            for (i = -19; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000,
+                                    //y: Math.floor((Math.random() * (100 - 0 + 1)) + 1)
+                                    y: Math.floor((Math.random() * (100 - 80) + 80))
+                                    //y: Math.random()
+                                });
+                            }
+                            return data;
+                        }())
+        							},
+                      {
+                          name: 'Random data1',
+                          selected: false,
+                          data: (function () {
+                              // generate an array of random data
+                              var data = [],
+                                  time = (new Date()).getTime(),
+                                  i;
+        
+                              for (i = -19; i <= 0; i += 1) {
+                                  data.push({
+                                      x: time + i * 1000,
+                                      y: Math.floor((Math.random() * (90 - 70) + 70))
+                                  });
+                              }
+                              return data;
+                          }())
+                      },
+                      {
+                          name: 'Random data2',
+                          selected: false,
+                          data: (function () {
+                              // generate an array of random data
+                              var data = [],
+                                  time = (new Date()).getTime(),
+                                  i;
+        
+                              for (i = -19; i <= 0; i += 1) {
+                                  data.push({
+                                      x: time + i * 1000,
+                                      y: Math.floor((Math.random() * (80 - 60) + 60))
+                                  });
+                              }
+                              return data;
+                          }())
+                      },
+                      {
+                          name: 'Random data3',
+                          selected: false,
+                          data: (function () {
+                              // generate an array of random data
+                              var data = [],
+                                  time = (new Date()).getTime(),
+                                  i;
+        
+                              for (i = -19; i <= 0; i += 1) {
+                                  data.push({
+                                      x: time + i * 1000,
+                                      y: Math.floor((Math.random() * (70 - 50) + 50))
+                                  });
+                              }
+                              return data;
+                          }())
+                      },
+                      {
+                          name: 'Random data4',
+                          selected: false,
+                          data: (function () {
+                              // generate an array of random data
+                              var data = [],
+                                  time = (new Date()).getTime(),
+                                  i;
+        
+                              for (i = -19; i <= 0; i += 1) {
+                                  data.push({
+                                      x: time + i * 1000,
+                                      y: Math.floor((Math.random() * (60 - 40) + 40))
+                                  });
+                              }
+                              return data;
+                          }())
+                      },
+                      {
+                          name: 'Random data5',
+                          selected: false,
+                          data: (function () {
+                              // generate an array of random data
+                              var data = [],
+                                  time = (new Date()).getTime(),
+                                  i;
+        
+                              for (i = -19; i <= 0; i += 1) {
+                                  data.push({
+                                      x: time + i * 1000,
+                                      y: Math.floor((Math.random() * (50 - 30) + 30))
+                                  });
+                              }
+                              return data;
+                          }())
+                    }]
+                });
+    
+                //button action
+                var data1 = $("#data1");
+                data1.change(function(){
+                		var series = chart.series[0];
+                    if(data1.is(":checked")){
+                        if (!series.visible) 
+                        {
+                        		series.show();
+                            data2.html('Hide series');
+                        }
+                    }
+                    else
+                    {
+                        if(series.visible)
+                        {
+                            series.hide();
+                            data2.html('Show series');
+                        }
+                    }
+                });
+                var trans1 = $("#trans1");
+                trans1.mouseover(function(){
+                		$(".highcharts-series-1").css("opacity","0.2");
+                    $(".highcharts-series-2").css("opacity","0.2");
+                    $(".highcharts-series-3").css("opacity","0.2");
+                    $(".highcharts-series-4").css("opacity","0.2");
+                    $(".highcharts-series-5").css("opacity","0.2");
+                });
+                trans1.mouseleave(function(){
+                		$(".highcharts-series-1").css("opacity","1");
+                    $(".highcharts-series-2").css("opacity","1");
+                    $(".highcharts-series-3").css("opacity","1");
+                    $(".highcharts-series-4").css("opacity","1");
+                    $(".highcharts-series-5").css("opacity","1");
+                });
+                var data2 = $("#data2");
+                data2.change(function(){
+                		var series = chart.series[1];
+                    if(data2.is(":checked")){
+                    		if (!series.visible)
+                        {
+                        		series.show();
+                            data2.html('Hide series');
+                        }
+                    }
+                    else
+                    {
+                    		if(series.visible)
+                        {
+                        		series.hide();
+                            data2.html('Show series');
+                        }
+                    }
+                });
+                var trans2 = $("#trans2");
+                trans2.mouseover(function(){
+                		$(".highcharts-series-0").css("opacity","0.2");
+                    $(".highcharts-series-2").css("opacity","0.2");
+                    $(".highcharts-series-3").css("opacity","0.2");
+                    $(".highcharts-series-4").css("opacity","0.2");
+                    $(".highcharts-series-5").css("opacity","0.2");
+                });
+                trans2.mouseleave(function(){
+                		$(".highcharts-series-0").css("opacity","1");
+                    $(".highcharts-series-2").css("opacity","1");
+                    $(".highcharts-series-3").css("opacity","1");
+                    $(".highcharts-series-4").css("opacity","1");
+                    $(".highcharts-series-5").css("opacity","1");
+                });
+                var data3 = $("#data3");
+                data3.change(function(){
+                		var series = chart.series[2];
+                    if(data3.is(":checked")){
+                    		if (!series.visible)
+                        {
+                        		series.show();
+                            data3.html('Hide series');
+                        }
+                    }
+                    else
+                    {
+                    		if(series.visible)
+                        {
+                        		series.hide();
+                            data3.html('Show series');
+                        }
+                    }
+                });
+                var trans3 = $("#trans3");
+                trans3.mouseover(function(){
+                		$(".highcharts-series-0").css("opacity","0.2");
+                    $(".highcharts-series-1").css("opacity","0.2");
+                    $(".highcharts-series-3").css("opacity","0.2");
+                    $(".highcharts-series-4").css("opacity","0.2");
+                    $(".highcharts-series-5").css("opacity","0.2");
+                });
+                trans3.mouseleave(function(){
+                		$(".highcharts-series-0").css("opacity","1");
+                    $(".highcharts-series-1").css("opacity","1");
+                    $(".highcharts-series-3").css("opacity","1");
+                    $(".highcharts-series-4").css("opacity","1");
+                    $(".highcharts-series-5").css("opacity","1");
+                });
+                var data4 = $("#data4");
+                data4.change(function(){
+                		var series = chart.series[3];
+                    if(data4.is(":checked")){
+                    		if (!series.visible)
+                        {
+                        		series.show();
+                            data4.html('Hide series');
+                        }
+                    }
+                    else
+                    {
+                    		if(series.visible)
+                        {
+                        		series.hide();
+                            data4.html('Show series');
+                        }
+                    }
+                });
+                var trans4 = $("#trans4");
+                trans4.mouseover(function(){
+                		$(".highcharts-series-0").css("opacity","0.2");
+                    $(".highcharts-series-1").css("opacity","0.2");
+                    $(".highcharts-series-2").css("opacity","0.2");
+                    $(".highcharts-series-4").css("opacity","0.2");
+                    $(".highcharts-series-5").css("opacity","0.2");
+                });
+                trans4.mouseleave(function(){
+                		$(".highcharts-series-0").css("opacity","1");
+                    $(".highcharts-series-1").css("opacity","1");
+                    $(".highcharts-series-2").css("opacity","1");
+                    $(".highcharts-series-4").css("opacity","1");
+                    $(".highcharts-series-5").css("opacity","1");
+                });
+                var data5 = $("#data5");
+                data5.change(function(){
+                		var series = chart.series[4];
+                    if(data5.is(":checked")){
+                    		if (!series.visible)
+                        {
+                        		series.show();
+                            data5.html('Hide series');
+                        }
+                    }
+                    else
+                    {
+                    		if(series.visible)
+                        {
+                        		series.hide();
+                            data5.html('Show series');
+                        }
+                    }
+                });
+                var trans5 = $("#trans5");
+                trans5.mouseover(function(){
+                		$(".highcharts-series-0").css("opacity","0.2");
+                    $(".highcharts-series-1").css("opacity","0.2");
+                    $(".highcharts-series-2").css("opacity","0.2");
+                    $(".highcharts-series-3").css("opacity","0.2");
+                    $(".highcharts-series-5").css("opacity","0.2");
+                });
+                trans5.mouseleave(function(){
+                	$(".highcharts-series-0").css("opacity","1");
+                    $(".highcharts-series-1").css("opacity","1");
+                    $(".highcharts-series-2").css("opacity","1");
+                    $(".highcharts-series-3").css("opacity","1");
+                    $(".highcharts-series-5").css("opacity","1");
+                });
+                var data6 = $("#data6");
+                data6.change(function(){
+                		var series = chart.series[5];
+                    if(data6.is(":checked")){
+                    		if (!series.visible)
+                        {
+                        		series.show();
+                            data6.html('Hide series');
+                        }
+                    }
+                    else
+                    {
+                    		if(series.visible)
+                        {
+                        		series.hide();
+                            data6.html('Show series');
+                        }
+                    }
+                });
+                var trans6 = $("#trans6");
+                trans6.mouseover(function(){
+                		$(".highcharts-series-0").css("opacity","0.2");
+                    $(".highcharts-series-1").css("opacity","0.2");
+                    $(".highcharts-series-2").css("opacity","0.2");
+                    $(".highcharts-series-3").css("opacity","0.2");
+                    $(".highcharts-series-4").css("opacity","0.2");
+                });
+                trans6.mouseleave(function(){
+                		$(".highcharts-series-0").css("opacity","1");
+                    $(".highcharts-series-1").css("opacity","1");
+                    $(".highcharts-series-2").css("opacity","1");
+                    $(".highcharts-series-3").css("opacity","1");
+                    $(".highcharts-series-4").css("opacity","1");
+                });
+            });
+        </script>
     </body>
 </html>
