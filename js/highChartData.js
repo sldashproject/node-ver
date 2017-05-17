@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
     
     //stacked bar chart
-    Highcharts.chart('mybarChart', {
+    var mystackbarchart = Highcharts.chart('mybarChart', {
 		chart: {
 			type: 'column'
 		},
@@ -528,16 +528,58 @@ $(document).ready(function () {
     });
 
     //setting action
-    var lineShow = $('#lineShow');
-    lineShow.click(function(){
+    var lineTokyoShow = $('#lineTokyoShow');
+    lineTokyoShow.click(function(){
         let series = mylinechart.series[0];
         series.show();
     });
     
-    var lineHide = $('#lineHide');
-    lineHide.click(function(){
+    var lineTokyoHide = $('#lineTokyoHide');
+    lineTokyoHide.click(function(){
         let series = mylinechart.series[0];
         series.hide();
+    });
+    
+    var lineLondonShow = $('#lineLondonShow');
+    lineLondonShow.click(function() {
+        let series = mylinechart.series[1];
+        series.show();
+    });
+    
+    var lineLondonHide = $('#lineLondonHide');
+    lineLondonHide.click(function() {
+        let series = mylinechart.series[1];
+        series.hide();
+    });
+    
+    var barAddSeries = $('#barAddSeries');
+    barAddSeries.click(function() {
+        let series0 = mystackbarchart.series[0];
+		series0.addPoint(3);
+		let series1 = mystackbarchart.series[1];
+		series1.addPoint(2);
+		let series2 = mystackbarchart.series[2];
+		series2.addPoint(4);
+		
+		let cate = mystackbarchart.xAxis[0].categories;
+		cate.push('StrawBerries');
+		mystackbarchart.xAxis[0].setCategories(cate, true);
+		mystackbarchart.redraw();
+    });
+    
+    var barDeleteSeries = $('#barDeleteSeries');
+    barDeleteSeries.click(function() {
+    	let series0 = mystackbarchart.series[0];
+		series0.removePoint(series0.data.length-1);
+		let series1 = mystackbarchart.series[1];
+		series1.removePoint(series1.data.length-1);
+		let series2 = mystackbarchart.series[2];
+		series2.removePoint(series2.data.length-1);
+		
+		let cate = mystackbarchart.xAxis[0].categories;
+		cate.splice(cate.length-1,1);
+		mystackbarchart.xAxis[0].setCategories(cate, true);
+		mystackbarchart.redraw();
     });
     
     var trans1 = $("#trans1");
