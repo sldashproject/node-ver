@@ -96,7 +96,7 @@ $(document).ready(function () {
 	});
 	
 	// Create the chart
-	Highcharts.chart('mybubbleChart', {
+	var mybubblechart = Highcharts.chart('mybubbleChart', {
 	    chart: {
 	        type: 'bubble',
 	        plotBorderWidth: 1,
@@ -189,27 +189,27 @@ $(document).ready(function () {
 	
 	    series: [{
 	        data: [
-	            { x: 95, y: 95, z: 13.8, name: 'BE', country: 'Belgium' },
-	            { x: 86.5, y: 102.9, z: 14.7, name: 'DE', country: 'Germany' },
-	            { x: 80.8, y: 91.5, z: 15.8, name: 'FI', country: 'Finland' },
-	            { x: 80.4, y: 102.5, z: 12, name: 'NL', country: 'Netherlands' },
-	            { x: 80.3, y: 86.1, z: 11.8, name: 'SE', country: 'Sweden' },
-	            { x: 78.4, y: 70.1, z: 16.6, name: 'ES', country: 'Spain' },
-	            { x: 74.2, y: 68.5, z: 14.5, name: 'FR', country: 'France' },
-	            { x: 73.5, y: 83.1, z: 10, name: 'NO', country: 'Norway' },
-	            { x: 71, y: 93.2, z: 24.7, name: 'UK', country: 'United Kingdom' },
-	            { x: 69.2, y: 57.6, z: 10.4, name: 'IT', country: 'Italy' },
-	            { x: 68.6, y: 20, z: 16, name: 'RU', country: 'Russia' },
-	            { x: 65.5, y: 126.4, z: 35.3, name: 'US', country: 'United States' },
-	            { x: 65.4, y: 50.8, z: 28.5, name: 'HU', country: 'Hungary' },
-	            { x: 63.4, y: 51.8, z: 15.4, name: 'PT', country: 'Portugal' },
-	            { x: 64, y: 82.9, z: 31.3, name: 'NZ', country: 'New Zealand' }
+	            { x: 95, y: 95, z: 13.8, id: 'BE', name: 'BE', country: 'Belgium' },
+	            { x: 86.5, y: 102.9, z: 14.7, id: 'DE', name: 'DE', country: 'Germany' },
+	            { x: 80.8, y: 91.5, z: 15.8, id: 'FI', name: 'FI', country: 'Finland' },
+	            { x: 80.4, y: 102.5, z: 12, id: 'NL', name: 'NL', country: 'Netherlands' },
+	            { x: 80.3, y: 86.1, z: 11.8, id: 'SE', name: 'SE', country: 'Sweden' },
+	            { x: 78.4, y: 70.1, z: 16.6, id: 'ES', name: 'ES', country: 'Spain' },
+	            { x: 74.2, y: 68.5, z: 14.5, id: 'FR', name: 'FR', country: 'France' },
+	            { x: 73.5, y: 83.1, z: 10, id: 'NO', name: 'NO', country: 'Norway' },
+	            { x: 71, y: 93.2, z: 24.7, id: 'UK', name: 'UK', country: 'United Kingdom' },
+	            { x: 69.2, y: 57.6, z: 10.4, id: 'IT', name: 'IT', country: 'Italy' },
+	            { x: 68.6, y: 20, z: 16, id: 'RU', name: 'RU', country: 'Russia' },
+	            { x: 65.5, y: 126.4, z: 35.3, id: 'US', name: 'US', country: 'United States' },
+	            { x: 65.4, y: 50.8, z: 28.5, id: 'HU', name: 'HU', country: 'Hungary' },
+	            { x: 63.4, y: 51.8, z: 15.4, id: 'PT', name: 'PT', country: 'Portugal' },
+	            { x: 64, y: 82.9, z: 31.3, id:'NZ', name: 'NZ', country: 'New Zealand' }
 	        ]
 	    }]
 	});
 	
 	// Create the chart
-	Highcharts.chart('mypieChart', {
+	var mypiechart = Highcharts.chart('mypieChart', {
 	    chart: {
 	        type: 'pie'
 	    },
@@ -331,7 +331,7 @@ $(document).ready(function () {
 	});
 	
 	//dynamic Chart
-	var chart = Highcharts.chart('myDynamicChart', {
+	var mydynamicchart = Highcharts.chart('myDynamicChart', {
         chart: {
             type: 'spline',
             animation: Highcharts.svg, 
@@ -582,20 +582,71 @@ $(document).ready(function () {
 		mystackbarchart.redraw();
     });
     
-    var trans1 = $("#trans1");
-    trans1.mouseover(function(){
-    	$(".highcharts-series-1").css("opacity","0.2");
-        $(".highcharts-series-2").css("opacity","0.2");
-        $(".highcharts-series-3").css("opacity","0.2");
-        $(".highcharts-series-4").css("opacity","0.2");
-        $(".highcharts-series-5").css("opacity","0.2");
-    });
-    trans1.mouseleave(function(){
-    	$(".highcharts-series-1").css("opacity","1");
-        $(".highcharts-series-2").css("opacity","1");
-        $(".highcharts-series-3").css("opacity","1");
-        $(".highcharts-series-4").css("opacity","1");
-        $(".highcharts-series-5").css("opacity","1");
+    var bubbleTransparent = $('#bubbleTransparent');
+    bubbleTransparent.click(function() {
+        $('.highcharts-point.highcharts-color-0').css("opacity","0.2");
     });
     
+    var bubbleRecover = $('#bubbleRecover');
+    bubbleRecover.click(function() {
+        $('.highcharts-point.highcharts-color-0').css("opacity","1");
+    });
+    
+    var bubbleColorChange = $('#bubbleColorChange');
+    bubbleColorChange.click(function() {
+        let be = mybubblechart.get('BE');
+		be.update({color: 'rgba(208,0,17,0.7)', fillColor: 'rgba(208,0,17,0.1)'});
+		let de = mybubblechart.get('DE');
+		de.update({color: 'rgba(255,255,0,0.7)', fillColor: 'rgba(255,255,0,0.1)'});
+		let fi = mybubblechart.get('FI');
+		fi.update({color: 'rgba(51,51,153,0.7)', fillColor: 'rgba(51,51,153,0.1)'});
+		let nl = mybubblechart.get('NL');
+		nl.update({color: 'rgba(51,102,51,0.7)', fillColor: 'rgba(51,102,51,0.1)'});
+		let se = mybubblechart.get('SE');
+		se.update({color: 'rgba(153,51,153,0.7)', fillColor: 'rgba(153,51,153,0.1)'});
+		let es = mybubblechart.get('ES');
+		es.update({color: 'rgba(153,102,255,0.7)', fillColor: 'rgba(153,102,255,0.1)'});
+		let fr = mybubblechart.get('FR');
+		fr.update({color: 'rgba(153,102,0,0.7)', fillColor: 'rgba(153,102,0,0.1)'});
+		let no = mybubblechart.get('NO');
+		no.update({color: 'rgba(0,255,255,0.7)', fillColor: 'rgba(0,255,255,0.1)'});
+		let uk = mybubblechart.get('UK');
+		uk.update({color: 'rgba(102,153,255,0.7)', fillColor: 'rgba(102,153,255,0.1)'});
+		let it = mybubblechart.get('IT');
+		it.update({color: 'rgba(204,51,153,0.7)', fillColor: 'rgba(204,51,153,0.1)'});
+		let ru = mybubblechart.get('RU');
+		ru.update({color: 'rgba(51,153,102,0.7)', fillColor: 'rgba(51,153,102,0.1)'});
+		let us = mybubblechart.get('US');
+		us.update({color: 'rgba(153,0,51,0.7)', fillColor: 'rgba(153,0,51,0.1)'});
+		let hu = mybubblechart.get('HU');
+		hu.update({color: 'rgba(102,204,255,0.7)', fillColor: 'rgba(102,204,255,0.1)'});
+		let pt = mybubblechart.get('PT');
+		pt.update({color: 'rgba(51,51,153,0.7)', fillColor: 'rgba(51,51,153,0.1)'});
+		let nz = mybubblechart.get('NZ');
+		nz.update({color: 'rgba(255,204,51,0.7)', fillColor: 'rgba(255,204,51,0.1)'});
+    });
+    
+    var pieBackground = $('#pieBackground');
+    pieBackground.click(function() {
+        mypiechart.update({
+        	chart: {
+        		backgroundColor: '#CCFF00'
+        	}
+        })
+    });
+    
+    var pieGradient = $('#pieGradient');
+    pieGradient.click(function() {
+        mypiechart.update({
+        	chart: {
+		        backgroundColor: {
+		            linearGradient: [0, 0, 500, 500],
+		            stops: [
+		                [0, 'rgb(255, 255, 255)'],
+		                [1, 'rgb(200, 200, 255)']
+		            ]
+		        }
+		    }
+        })
+    });
 });
