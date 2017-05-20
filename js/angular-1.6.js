@@ -1,6 +1,13 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('MainCtrl', ['$scope', function ($scope) {
+    var socketUrl = "https://localhost:3000";
+    var socket = io.connect(socketUrl);
+    
+    socket.on('connectDb', function (data) {
+        console.log('Connected clients: ' + data);
+    });
+    
     // Controller magic
     $scope.first_name1 = '';
     $scope.last_name1 = '';
@@ -94,6 +101,24 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
 	 document.getElementById("todoName").value = "";
   }
   // TodoList end
-  
-  
 }]);
+
+//restrict only number
+myApp.directive('onlyNumber', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            element.on('keydown', function (event) {
+                var key = (event.which) ? event.which : event.keyCode;
+                if((key >= 48 && key <= 57) || (key >= 96 && key <= 105) || (key == 8) || (key == 9) ||
+                    (key == 13) || (key == 16) || (key == 37) || (key == 39) || (key == 116)) {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
+        }
+    };
+});
