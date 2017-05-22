@@ -1,12 +1,12 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('MainCtrl', ['$scope', function ($scope) {
-    var socketUrl = "https://localhost:3000";
-    var socket = io.connect(socketUrl);
+    // var socketUrl = "https://localhost:3000";
+    // var socket = io.connect(socketUrl);
     
-    socket.on('connectDb', function (data) {
-        console.log('Connected clients: ' + data);
-    });
+    // socket.on('connectDb', function (data) {
+    //     console.log('Connected clients: ' + data);
+    // });
     
     // Controller magic
     $scope.first_name1 = '';
@@ -16,16 +16,24 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
     
     $scope.modelView = true;
     $scope.todoView = false;
+    $scope.dbtestView = false;
     $scope.ViewPage = function(view){
         switch(view)
         {
             case 1: 
                 $scope.modelView = true;
                 $scope.todoView = false;
+                $scope.dbtestView = false;
                 break;
             case 2:
                 $scope.modelView = false;
                 $scope.todoView = true;
+                $scope.dbtestView = false;
+                break;
+            case 3:
+                $scope.modelView = false;
+                $scope.todoView = false;
+                $scope.dbtestView = true;
                 break;
         }
     };

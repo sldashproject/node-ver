@@ -1,0 +1,30 @@
+{
+  "name": "sldashproject",
+  "version": "0.0.1",
+  "description": "Dashboard Project by Song and Lee",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "mysql": "^2.13.0",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.1"
+  },
+  "main": "Server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sldashproject/node-ver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sldashproject/node-ver/issues"
+  },
+  "homepage": "https://dashboard-node-ver-sldashproject.c9users.io"
+}

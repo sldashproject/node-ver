@@ -166,11 +166,11 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" id="vueApp">
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Angular-1.6 <small style="cursor:pointer" ng-click="ViewPage(1)">Model</small> <small style="cursor:pointer" ng-click="ViewPage(2)">TodoList</small> <small style="cursor:pointer" ng-click="ViewPage(3)">DBtest</small></h3>
+                        <h3>Vue-2.3.3 <small style="cursor:pointer" v-on:click="ViewPage(1)">Model</small> <small style="cursor:pointer" v-on:click="ViewPage(2)">TodoList</small></h3>
                     </div>
 
                     <div class="title_right">
@@ -186,11 +186,11 @@
                 </div>
                 
                 <div class="clearfix"></div>
-                <div class="row" ng-show="modelView">
+                <div class="row" v-if="configView == 1">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>ng-model</h2>
+                                <h2>Vue-model</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -204,7 +204,7 @@
                                         <input type="text" id="first-name" ng-model="first_name1" required="required" class="form-control col-md-7 col-xs-12">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        First Name: {{first_name1}}
+                                        First Name: 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -214,7 +214,7 @@
                                         <input type="text" id="last-name" name="last-name" ng-model="last_name1" required="required" class="form-control col-md-7 col-xs-12">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Last Name: {{last_name1}}
+                                        Last Name: 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -223,7 +223,7 @@
                                         <input id="middle-name" class="form-control col-md-7 col-xs-12" ng-model="middle_name1" type="text" name="middle-name">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Middle Name / Initial: {{middle_name1}}
+                                        Middle Name / Initial: 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -250,7 +250,7 @@
                                         <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" ng-model="birth1" required="required" type="text" only-number>
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Date Of Birth: {{birth1}}
+                                        Date Of Birth: 
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>
@@ -262,14 +262,14 @@
                                     </div>
                                 </div>
 
-                                </form>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
             
                 <div class="clearfix"></div>
-                <div class="row" ng-show="todoView">
+                <div class="row" v-if="configView == 2">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
@@ -278,130 +278,45 @@
                             </div>
                             <div class="x_content">
                             <br />
-                                <div>
-                                    <form id="todoFrom" name="todoForm" ng-submit="add(newTodoTitle)">
-                                        <div class="input-group">
-                                            <input id="todoName" class="form-control col-md-7 col-xs-12" type="text" ng-model="newTodoTitle" placeholder="Input new todo" minlength="3" autofocus>
-                                            <span class="input-group-btn">
-                            					<button class="btn btn-success" type="submit">Add</button>
-                            				</span>	
-                                        </div>
-                                        <div ng-show="todoForm.$dirty && todoForm.$invalid">
-                            				<div class="alert alert-warning" role="alert">more than 3 letters</div>
-                            			</div>
-                                    </form><br>
-                                    <ul class="list-unstyled">
-                            		  <li ng-repeat="todo in todos | filter:statusFilter">
-                            		      <date>createdAt: {{todo.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</date>
-                            			  <div class="input-group">
-                            				  <span class="input-group-addon">
-                            				      <input type="checkbox" ng-model="todo.completed">
-                            				  </span>
-                            				  <input type="text" class="form-control" ng-model="todo.title">
-                            				  <span class="input-group-btn">
-                            				      <button class="btn btn-danger" type="button" ng-click="remove(todo)">Delete</button>
-                            				  </span>
-                            			  </div>
-                            			  <br>
-                            		  </li>
-                            		</ul>
-                                    <div class="ln_solid"></div>
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button class="btn btn-primary" ng-click="statusFilter={completed:true}">Completed</button>
-                						    <button class="btn btn-primary" ng-click="statusFilter={completed:false}">Active</button>
-                                            <button class="btn btn-primary" ng-click="statusFilter={}">All</button>
-                                        </div>
+                            <div>
+                                <form id="todoFrom" name="todoForm" ng-submit="add(newTodoTitle)">
+                                    <div class="input-group">
+                                        <input id="todoName" class="form-control col-md-7 col-xs-12" type="text" ng-model="newTodoTitle" placeholder="Input new todo" minlength="3" autofocus>
+                                        <span class="input-group-btn">
+                        					<button class="btn btn-success" type="submit">Add</button>
+                        				</span>	
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="clearfix"></div>
-                <div class="row" ng-show="dbtestView">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>db-tableCreate</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                            <br />
-                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="first-name" ng-model="first_name1" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        First Name: {{first_name1}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="last-name" name="last-name" ng-model="last_name1" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Last Name: {{last_name1}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="middle-name" class="form-control col-md-7 col-xs-12" ng-model="middle_name1" type="text" name="middle-name">
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Middle Name / Initial: {{middle_name1}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div id="gender" class="btn-group" data-toggle="buttons">
-                                            <label ng-class="{true: 'btn btn-primary', false: 'btn btn-default'}[modelMale]" ng-click="modelGender(1)">
-                                                <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-                                            </label>
-                                            <label ng-class="{true: 'btn btn-primary', false: 'btn btn-default'}[modelFemale]" ng-click="modelGender(2)">
-                                                <input type="radio" name="gender" value="female"> Female
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        <div ng-if="modelMale">Gender: Male</div>
-                                        <div ng-if="modelFemale">Gender: Female</div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth(only Number) <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" ng-model="birth1" required="required" type="text" only-number>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Date Of Birth: {{birth1}}
-                                    </div>
-                                </div>
+                                    <div ng-show="todoForm.$dirty && todoForm.$invalid">
+                        				<div class="alert alert-warning" role="alert">more than 3 letters</div>
+                        			</div>
+                                </form><br>
+                                <ul class="list-unstyled">
+                        		  <li ng-repeat="todo in todos | filter:statusFilter">
+                        		      <date>createdAt: </date>
+                        			  <div class="input-group">
+                        				<span class="input-group-addon">
+                        				  <input type="checkbox" ng-model="todo.completed">
+                        				</span>
+                        				<input type="text" class="form-control" ng-model="todo.title">
+                        				<span class="input-group-btn">
+                        				  <button class="btn btn-danger" type="button" ng-click="remove(todo)">Delete</button>
+                        				</span>
+                        			  </div>
+                        			  <br>
+                        		  </li>
+                        		</ul>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button class="btn btn-primary" type="button">Cancel</button>
-            						    <button class="btn btn-primary" ng-click="modelReset()" type="reset">Reset</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button class="btn btn-primary" ng-click="statusFilter={completed:true}">Completed</button>
+            						    <button class="btn btn-primary" ng-click="statusFilter={completed:false}">Active</button>
+                                        <button class="btn btn-primary" ng-click="statusFilter={}">All</button>
                                     </div>
                                 </div>
-
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
         
@@ -417,8 +332,7 @@
     
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="js/custom.min.js"></script>
-    <script src="js/socket.io-1.3.5.min.js"></script>
-    <script src="js/angular-1.6.js"></script>
+    <script src="js/vue-2.3.js"></script>

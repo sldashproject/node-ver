@@ -3,7 +3,7 @@ var https = require("https");
 var express = require("express");
 var fs = require("fs");
 var path = require("path");
-
+var mysql = require("mysql");
 var app = express();
 
 app.use('/css', express.static(__dirname + '/css'));
@@ -70,30 +70,29 @@ app.get('/highChart.html', function(req, res){
     });
 });
 
-var server = http.createServer(app).listen(8080, function(){ 
+var connection = mysql.createConnection({
+    host    :'localhost',
+    port : 3306,
+    user : 'root',
+    password : '',
+    database:'dashboard'
+});
+
+app.post('/createTable', function(req, res){
+    let tablename = req.body.tablename;
+    let query = 'create table ? (id int(11) unsigned not null, name varchar(30) not null)';
+    let implementation = connection.query(query,tablename,function(err,result){
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        console.log(implementation);
+        res.send(200,'success');
+    });
+});
+
+var server = http.createServer(app);
+
+server.listen(8080, function(){ 
     console.log('start');
-});
-
-var mysql = require("mysql");
-var io = require("socket.io").listen(3000);
-
-var socketCount = 0;
-
-var connection = mysql.createPool({
-  host     : "localhost",
-  user     : "root",
-  password : ""
-});
-
-connection.getConnection(function(err){
-    if(!err) console.log("connected");
-    else console.log(err);
-});
-
-io.sockets.on('connection', function(socket)
-{
-    // Socket has connected, increase socket count
-    socketCount++;
-    // Let all sockets know how many are connected
-    io.sockets.emit('connectDb', socketCount);
 });
