@@ -63,52 +63,59 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
     
     // TodoList start
     $scope.todos = [
-    {
-      title: 'Schedule meeting with new client',
-      completed: false,
-      createdAt: Date.now()
-    },
-    {
-      title: 'Create email address for new intern',
-      completed: false,
-      createdAt: Date.now()
-    },
-    {
-      title: 'Have IT fix the network printer',
-      completed: true,
-      createdAt: Date.now()
+        {
+          title: 'Schedule meeting with new client',
+          completed: false,
+          createdAt: Date.now()
+        },
+        {
+          title: 'Create email address for new intern',
+          completed: false,
+          createdAt: Date.now()
+        },
+        {
+          title: 'Have IT fix the network printer',
+          completed: true,
+          createdAt: Date.now()
+        }
+    ];
+  
+    $scope.remove = function(todo){
+	    //find todo index in todos
+	    var idx = $scope.todos.findIndex(function(item){
+		    return item.id === todo.id;
+	    })
+	  
+	    // remove from todos
+	    if(idx > -1){
+		    $scope.todos.splice(idx,1)
+	    }
     }
-  ];
   
-  $scope.remove = function(todo){
-	  //find todo index in todos
-	  var idx = $scope.todos.findIndex(function(item){
-		  return item.id === todo.id;
-	  })
+    $scope.add = function(newTodoTitle){
+	    //create new todos
+	    var newTodo = {
+		    title: newTodoTitle,
+		    completed: false,
+		    createdAt: Date.now()
+	    };
 	  
-	  // remove from todos
-	  if(idx > -1){
-		  $scope.todos.splice(idx,1)
-	  }
-  }
+	  
+  	    // push into todos
+	    $scope.todos.push(newTodo);	 
+	  
+	    // empty focus
+	    //$scope.newTodoTitle = "";
+	    document.getElementById("todoName").value = "";
+    }
+    // TodoList end
   
-  $scope.add = function(newTodoTitle){
-	  //create new todos
-	  var newTodo = {
-		  title: newTodoTitle,
-		  completed: false,
-		  createdAt: Date.now()
-	  };
-	  
-	  
-	  // push into todos
-	  $scope.todos.push(newTodo);	 
-	  
-	  // empty focus
-	 //$scope.newTodoTitle = "";
-	 document.getElementById("todoName").value = "";
-  }
-  // TodoList end
+    $.ajax({
+        url: 'https://dashboard-node-ver-sldashproject.c9users.io/getList',
+        complete: function(data) {
+            console.log(data);
+        }
+    });
 }]);
 
 //restrict only number

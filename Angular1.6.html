@@ -329,69 +329,27 @@
                             </div>
                             <div class="x_content">
                             <br />
-                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                <form id="db-form" data-parsley-validate class="form-horizontal form-label-left" method="post" action="/addList">
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="first-name" ng-model="first_name1" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        First Name: {{first_name1}}
+                                        <input type="text" required="required" name="name" class="form-control col-md-7 col-xs-12">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="last-name" name="last-name" ng-model="last_name1" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Last Name: {{last_name1}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="middle-name" class="form-control col-md-7 col-xs-12" ng-model="middle_name1" type="text" name="middle-name">
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Middle Name / Initial: {{middle_name1}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div id="gender" class="btn-group" data-toggle="buttons">
-                                            <label ng-class="{true: 'btn btn-primary', false: 'btn btn-default'}[modelMale]" ng-click="modelGender(1)">
-                                                <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-                                            </label>
-                                            <label ng-class="{true: 'btn btn-primary', false: 'btn btn-default'}[modelFemale]" ng-click="modelGender(2)">
-                                                <input type="radio" name="gender" value="female"> Female
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        <div ng-if="modelMale">Gender: Male</div>
-                                        <div ng-if="modelFemale">Gender: Female</div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth(only Number) <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" ng-model="birth1" required="required" type="text" only-number>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12" style="margin-top: 7px">
-                                        Date Of Birth: {{birth1}}
+                                        <input type="text" name="email" required="required" class="form-control col-md-7 col-xs-12">
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                         <button class="btn btn-primary" type="button">Cancel</button>
-            						    <button class="btn btn-primary" ng-click="modelReset()" type="reset">Reset</button>
+            						    <button class="btn btn-primary" type="reset">Reset</button>
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>

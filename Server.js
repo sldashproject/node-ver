@@ -4,11 +4,20 @@ var express = require("express");
 var fs = require("fs");
 var path = require("path");
 var mysql = require("mysql");
+var bodyParser  = require('body-parser');
+var connection  = require('express-myconnection'); 
 var app = express();
 
-app.use('/css', express.static(__dirname + '/css'));
-app.use('/js', express.static(__dirname + '/js'));
-app.use('/images', express.static(__dirname + '/images'));
+app.use('/css', express.static(path.join(__dirname, '/css')));
+app.use('/js', express.static(path.join(__dirname, '/js')));
+app.use('/images', express.static(path.join(__dirname, '/images')));
+
+// [CONFIGURE APP TO USE bodyParser]
+app.set('port', process.env.PORT || 8080);
+app.set('ip', process.env.IP || '192.168.2.2');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
     fs.readFile('index.html', function(err, data){
@@ -78,21 +87,32 @@ var connection = mysql.createConnection({
     database:'dashboard'
 });
 
-app.post('/createTable', function(req, res){
-    let tablename = req.body.tablename;
-    let query = 'create table ? (id int(11) unsigned not null, name varchar(30) not null)';
-    let implementation = connection.query(query,tablename,function(err,result){
+app.post('/addList', function(req, res){
+    var name = req.body.name;
+    var email = req.body.email;
+    console.log(name+": "+email);
+    var query = "insert into test(name,email) values('"+name+"','"+email+"')";
+    var implementation = connection.query(query,function(err,result){
         if (err) {
             console.error(err);
             throw err;
         }
-        console.log(implementation);
-        res.send(200,'success');
+        res.redirect('Angular1.6.html');
     });
 });
 
-var server = http.createServer(app);
+app.get('/getList', function(req, res) {
+    var query = "select * from test";
+    var implementation = connection.query(query,function(err,rows){
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        res.setHeader('Access-Control-Allow-Methods', 'GET');
+        res.json(rows);
+    });
+});
 
-server.listen(8080, function(){ 
+var server = http.createServer(app).listen(app.get('port'), function(){ 
     console.log('start');
 });
