@@ -170,7 +170,12 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Angular-1.6 <small style="cursor:pointer" ng-click="ViewPage(1)">Model</small> <small style="cursor:pointer" ng-click="ViewPage(2)">TodoList</small> <small style="cursor:pointer" ng-click="ViewPage(3)">DBtest</small></h3>
+                        <h3>Angular-1.6 
+                            <small style="cursor:pointer" ng-click="ViewPage(1)">Model</small>
+                            <small style="cursor:pointer" ng-click="ViewPage(2)">TodoList</small>
+                            <small style="cursor:pointer" ng-click="ViewPage(3)">DBtest</small>
+                            <small style="cursor:pointer" ng-click="ViewPage(4)">DB-Select</small>
+                        </h3>
                     </div>
 
                     <div class="title_right">
@@ -359,6 +364,37 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="clearfix"></div>
+                <div class="row" ng-show="dbselectView">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>db-tableSelect</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                            <br />
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="data in selectDB">
+                                        <tr>
+                                            <td>{{data.id}}</td>
+                                            <td>{{data.name}}</td>
+                                            <td>{{data.email}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
                 
             </div>
         </div>

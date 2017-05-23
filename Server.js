@@ -8,17 +8,20 @@ var bodyParser  = require('body-parser');
 var connection  = require('express-myconnection'); 
 var app = express();
 
+// folder setting for starting web page 
+// if it doesn't exist this config, web page couldn't read css or js files.
 app.use('/css', express.static(path.join(__dirname, '/css')));
 app.use('/js', express.static(path.join(__dirname, '/js')));
 app.use('/images', express.static(path.join(__dirname, '/images')));
 
-// [CONFIGURE APP TO USE bodyParser]
+// setting port
 app.set('port', process.env.PORT || 8080);
-app.set('ip', process.env.IP || '192.168.2.2');
 
+// setting urlencoding and using json
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// main page load
 app.get('/', function(req, res){
     fs.readFile('index.html', function(err, data){
         if(!res) console.log(err);
@@ -29,6 +32,7 @@ app.get('/', function(req, res){
     });
 });
 
+// main page load
 app.get('/index.html', function(req, res){
     fs.readFile('index.html', function(err, data){
         if(!res) console.log(err);
@@ -39,6 +43,7 @@ app.get('/index.html', function(req, res){
     });
 });
 
+// Angular-1.6 page load
 app.get('/Angular1.6.html', function(req, res){
     fs.readFile('Angular1.6.html', function(err, data){
         if(!res) console.log(err);
@@ -49,6 +54,7 @@ app.get('/Angular1.6.html', function(req, res){
     });
 });
 
+// Chart JS page load
 app.get('/chartjs.html', function(req, res){
     fs.readFile('chartjs.html', function(err, data){
        if(!res) console.log(err);
@@ -59,6 +65,7 @@ app.get('/chartjs.html', function(req, res){
     });
 });
 
+// Google Chart page load
 app.get('/googleChart.html', function(req, res) {
     fs.readFile('googleChart.html', function(err, data) {
         if(!res) console.log(err);
@@ -69,6 +76,7 @@ app.get('/googleChart.html', function(req, res) {
     });
 });
 
+// High Chart page load
 app.get('/highChart.html', function(req, res){
     fs.readFile('highChart.html', function(err, data){
         if(!res) console.log(err);
@@ -79,6 +87,18 @@ app.get('/highChart.html', function(req, res){
     });
 });
 
+// Vue page load
+app.get('/Vue.html', function(req, res) {
+    fs.readFile('Vue.html', function(err, data) {
+        if(!res) console.log(err);
+        else {
+            res.writeHead(200, {'Content-Type':'text/html'});
+            res.end(data);
+        }
+    });
+});
+
+// mysql connection
 var connection = mysql.createConnection({
     host    :'localhost',
     port : 3306,
@@ -87,6 +107,7 @@ var connection = mysql.createConnection({
     database:'dashboard'
 });
 
+// add data to db
 app.post('/addList', function(req, res){
     var name = req.body.name;
     var email = req.body.email;
@@ -98,9 +119,11 @@ app.post('/addList', function(req, res){
             throw err;
         }
         res.redirect('Angular1.6.html');
+        connection.release();
     });
 });
 
+// get all data from db
 app.get('/getList', function(req, res) {
     var query = "select * from test";
     var implementation = connection.query(query,function(err,rows){
@@ -110,9 +133,11 @@ app.get('/getList', function(req, res) {
         }
         res.setHeader('Access-Control-Allow-Methods', 'GET');
         res.json(rows);
+        connection.release();
     });
 });
 
+// server start
 var server = http.createServer(app).listen(app.get('port'), function(){ 
     console.log('start');
 });

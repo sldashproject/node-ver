@@ -17,6 +17,7 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.modelView = true;
     $scope.todoView = false;
     $scope.dbtestView = false;
+    $scope.dbselectView = false;
     $scope.ViewPage = function(view){
         switch(view)
         {
@@ -24,16 +25,25 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
                 $scope.modelView = true;
                 $scope.todoView = false;
                 $scope.dbtestView = false;
+                $scope.dbselectView = false;
                 break;
             case 2:
                 $scope.modelView = false;
                 $scope.todoView = true;
                 $scope.dbtestView = false;
+                $scope.dbselectView = false;
                 break;
             case 3:
                 $scope.modelView = false;
                 $scope.todoView = false;
                 $scope.dbtestView = true;
+                $scope.dbselectView = false;
+                break;
+            case 4:
+                $scope.modelView = false;
+                $scope.todoView = false;
+                $scope.dbtestView = false;
+                $scope.dbselectView = true;
                 break;
         }
     };
@@ -114,6 +124,7 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
         url: 'https://dashboard-node-ver-sldashproject.c9users.io/getList',
         complete: function(data) {
             console.log(data);
+            $scope.selectDB = data.responseJSON;
         }
     });
 }]);
