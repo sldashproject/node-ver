@@ -54,6 +54,17 @@ app.get('/Angular1.6.html', function(req, res){
     });
 });
 
+// ReactJS page load
+app.get('/reactjs.html', function(req, res){
+    fs.readFile('reactjs.html', function(err, data){
+        if(!res) console.log(err);
+        else {
+             res.writeHead(200, {'Content-Type':'text/html'});
+             res.end(data);
+        }
+    });
+});
+
 // Chart JS page load
 app.get('/chartjs.html', function(req, res){
     fs.readFile('chartjs.html', function(err, data){
@@ -119,7 +130,6 @@ app.post('/addList', function(req, res){
             throw err;
         }
         res.redirect('Angular1.6.html');
-        connection.release();
     });
 });
 
@@ -133,7 +143,6 @@ app.get('/getList', function(req, res) {
         }
         res.setHeader('Access-Control-Allow-Methods', 'GET');
         res.json(rows);
-        connection.release();
     });
 });
 

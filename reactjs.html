@@ -11,6 +11,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Custom Theme Style -->
         <link href="css/custom.min.css" rel="stylesheet">
+		
+		<!-- ReactJS -->
+		<script src="https://fb.me/react-0.14.2.js"></script>
+        <script src="https://fb.me/react-dom-0.14.2.js"></script>
+        <script type="text/jsx" src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+		
     </head>
 
     <body ng-app="myApp" class="nav-md">
@@ -103,7 +109,7 @@
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img src="images/CA_icon.png" alt="Profile Image" /></span>
                                         <span>
                                             <span>John Smith</span>
                                             <span class="time">3 mins ago</span>
@@ -115,7 +121,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img src="images/CA_icon.png" alt="Profile Image" /></span>
                                         <span>
                                             <span>John Smith</span>
                                             <span class="time">3 mins ago</span>
@@ -127,7 +133,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img src="images/CA_icon.png" alt="Profile Image" /></span>
                                         <span>
                                             <span>John Smith</span>
                                             <span class="time">3 mins ago</span>
@@ -139,7 +145,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img src="images/CA_icon.png" alt="Profile Image" /></span>
                                         <span>
                                             <span>John Smith</span>
                                             <span class="time">3 mins ago</span>
@@ -166,109 +172,33 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main" id="vueApp">
+        <div class="right_col" role="main">
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Vue-2.3.3 <small style="cursor:pointer" v-on:click="ViewPage(1)">Inquiry</small> <small style="cursor:pointer" v-on:click="ViewPage(2)">Add Data</small></h3>
+                        <h3>ReactJS</h3>
                     </div>
-
-                    <div class="title_right">
-                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Go!</button>
-                                </span>
-                            </div>
-                        </div>
+                </div> 
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>React-model</h2>
+                        <div class="clearfix"></div>
                     </div>
-                </div>
-                
-                <div class="clearfix"></div>
-                <div class="row" v-if="configView == 1">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>DB-inquiry</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                            <br />
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="data in inquiryData">
-                                            <td>{{data.id}}</td>
-                                            <td>{{data.name}}</td>
-                                            <td>{{data.email}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>    
-                        </div>
-                    </div>
-                </div>
-            
-            
-                <div class="clearfix"></div>
-                <div class="row" v-if="configView == 2">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>TodoList</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                            <br />
-                            <div>
-                                <form id="todoFrom" name="todoForm" ng-submit="add(newTodoTitle)">
-                                    <div class="input-group">
-                                        <input id="todoName" class="form-control col-md-7 col-xs-12" type="text" ng-model="newTodoTitle" placeholder="Input new todo" minlength="3" autofocus>
-                                        <span class="input-group-btn">
-                        					<button class="btn btn-success" type="submit">Add</button>
-                        				</span>	
-                                    </div>
-                                    <div ng-show="todoForm.$dirty && todoForm.$invalid">
-                        				<div class="alert alert-warning" role="alert">more than 3 letters</div>
-                        			</div>
-                                </form><br>
-                                <ul class="list-unstyled">
-                        		  <li ng-repeat="todo in todos | filter:statusFilter">
-                        		      <date>createdAt: </date>
-                        			  <div class="input-group">
-                        				<span class="input-group-addon">
-                        				  <input type="checkbox" ng-model="todo.completed">
-                        				</span>
-                        				<input type="text" class="form-control" ng-model="todo.title">
-                        				<span class="input-group-btn">
-                        				  <button class="btn btn-danger" type="button" ng-click="remove(todo)">Delete</button>
-                        				</span>
-                        			  </div>
-                        			  <br>
-                        		  </li>
-                        		</ul>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button class="btn btn-primary" ng-click="statusFilter={completed:true}">Completed</button>
-            						    <button class="btn btn-primary" ng-click="statusFilter={completed:false}">Active</button>
-                                        <button class="btn btn-primary" ng-click="statusFilter={}">All</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="x_content">
+                    <br />
+                    <div class="input-group">
+                        <button onClick="render()">Render</button>
+    					<button onClick="unmount()">Unmount</button>
+    					<br>
+    				<div id="panel"></div>
                 </div>
             </div>
         </div>
+            </div>
+        </div>
+
         
+
         <!-- footer content -->
         <footer>
             <div class="pull-right">
@@ -279,9 +209,60 @@
         <!-- /footer content -->
     </div>
     
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+    var ActionButton = React.createClass({
+        render: function() {
+            return (
+                    <button className="ActionButton" onClick={this.props.onAction}>
+                        <span>{this.props.text}</span>
+                    </button>
+            );
+        }
+    });
+    var APP = React.createClass({
+        getInitialState: function() {
+            return {count: this.props.initialCount};
+        },
+        addToCount: function(delta) {
+            this.setState({count: this.state.count + delta})
+        },
+        componentWillMount : function() {
+            console.log("componentWillMount");
+        },
+        render: function () {
+            console.log('render')
+            return (
+                    <div>
+                        <h3>Count: {this.state.count}</h3>
+                        <ActionButton text="+1" onAction={this.addToCount.bind(this, 1)}></ActionButton>
+                        <ActionButton text="-1" onAction={this.addToCount.bind(this, -1)}></ActionButton>
+                    </div>
+            )
+        },
+        componentDidMount : function() {
+            console.log("componentDidMount");
+        },
+        componentWillUnmount : function(){
+            console.log("componentWillUnmount");
+        }
+    });
+    ReactDOM.render(<APP initialCount={0}/>, document.getElementById('panel'));
+    
+    window.render = function() {
+        ReactDOM.render(   // mounting to panel
+            <APP initialCount = {0} />, document.getElementById('panel')
+        )
+    }
+    
+    window.unmount = function(){
+        ReactDOM.unmountComponentAtNode(document.getElementById('panel'))
+    }
+    </script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="js/custom.min.js"></script>
-    <script src="js/vue-2.3.js"></script>
+    <script src="js/socket.io-1.3.5.min.js"></script>
+</body>
+</html>
