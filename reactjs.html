@@ -13,14 +13,16 @@
         <link href="css/custom.min.css" rel="stylesheet">
 		
 		<!-- ReactJS -->
-		<script src="https://fb.me/react-0.14.2.js"></script>
-        <script src="https://fb.me/react-dom-0.14.2.js"></script>
-        <script type="text/jsx" src="https://fb.me/JSXTransformer-0.13.3.js"></script>
-		
+		<script src="https://fb.me/react-dom-0.14.7.min.js"></script>
+        <script src="https://fb.me/react-0.14.7.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.min.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.min.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
     </head>
 
-    <body ng-app="myApp" class="nav-md">
-    <div ng-controller="MainCtrl" class="container body">
+    <body class="nav-md">
+    <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
@@ -62,9 +64,9 @@
                             </li>
                             <li><a><i class="fa fa-chrome" aria-hidden="true"></i> View Model <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="chartjs.html">AngularJS-1.6</a></li>
-                                    <li><a href="chartjs.html">ReactJS</a></li>
-                                    <li><a href="chartjs.html">VueJS</a></li>
+                                    <li><a href="Angular1.6.html">AngularJS-1.6</a></li>
+                                    <li><a href="reactjs.html">ReactJS</a></li>
+                                    <li><a href="Vue.html">VueJS</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -181,15 +183,15 @@
                 </div> 
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>React-model</h2>
+                        <h2>CRUD example</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                     <br />
-                    <div class="input-group">
-                        <button onClick="render()">Render</button>
-    					<button onClick="unmount()">Unmount</button>
-    					<br>
+        <!--            <div class="input-group">-->
+        <!--                <button onClick="render()">Render</button>-->
+    				<!--	<button onClick="unmount()">Unmount</button>-->
+    				<!--	<br>-->
     				<div id="panel"></div>
                 </div>
             </div>
@@ -209,56 +211,57 @@
         <!-- /footer content -->
     </div>
     
-    <script type="text/jsx">
-    /** @jsx React.DOM */
-    var ActionButton = React.createClass({
-        render: function() {
-            return (
-                    <button className="ActionButton" onClick={this.props.onAction}>
-                        <span>{this.props.text}</span>
-                    </button>
-            );
-        }
-    });
-    var APP = React.createClass({
-        getInitialState: function() {
-            return {count: this.props.initialCount};
-        },
-        addToCount: function(delta) {
-            this.setState({count: this.state.count + delta})
-        },
-        componentWillMount : function() {
-            console.log("componentWillMount");
-        },
-        render: function () {
-            console.log('render')
-            return (
-                    <div>
-                        <h3>Count: {this.state.count}</h3>
-                        <ActionButton text="+1" onAction={this.addToCount.bind(this, 1)}></ActionButton>
-                        <ActionButton text="-1" onAction={this.addToCount.bind(this, -1)}></ActionButton>
-                    </div>
-            )
-        },
-        componentDidMount : function() {
-            console.log("componentDidMount");
-        },
-        componentWillUnmount : function(){
-            console.log("componentWillUnmount");
-        }
-    });
-    ReactDOM.render(<APP initialCount={0}/>, document.getElementById('panel'));
+    // <script type="text/babel">
+    // /** @jsx React.DOM */
+    // var ActionButton = React.createClass({
+    //     render: function() {
+    //         return (
+    //                 <button className="ActionButton" onClick={this.props.onAction}>
+    //                     <span>{this.props.text}</span>
+    //                 </button>
+    //         );
+    //     }
+    // });
+    // var APP = React.createClass({
+    //     getInitialState: function() {
+    //         return {count: this.props.initialCount};
+    //     },
+    //     addToCount: function(delta) {
+    //         this.setState({count: this.state.count + delta})
+    //     },
+    //     componentWillMount : function() {
+    //         console.log("componentWillMount");
+    //     },
+    //     render: function () {
+    //         console.log('render')
+    //         return (
+    //                 <div>
+    //                     <h3>Count: {this.state.count}</h3>
+    //                     <ActionButton text="+1" onAction={this.addToCount.bind(this, 1)}></ActionButton>
+    //                     <ActionButton text="-1" onAction={this.addToCount.bind(this, -1)}></ActionButton>
+    //                 </div>
+    //         )
+    //     },
+    //     componentDidMount : function() {
+    //         console.log("componentDidMount");
+    //     },
+    //     componentWillUnmount : function(){
+    //         console.log("componentWillUnmount");
+    //     }
+    // });
+    // ReactDOM.render(<APP initialCount={0}/>, document.getElementById('panel'));
     
-    window.render = function() {
-        ReactDOM.render(   // mounting to panel
-            <APP initialCount = {0} />, document.getElementById('panel')
-        )
-    }
+    // window.render = function() {
+    //     ReactDOM.render(   // mounting to panel
+    //         <APP initialCount = {0} />, document.getElementById('panel')
+    //     )
+    // }
     
-    window.unmount = function(){
-        ReactDOM.unmountComponentAtNode(document.getElementById('panel'))
-    }
-    </script>
+    // window.unmount = function(){
+    //     ReactDOM.unmountComponentAtNode(document.getElementById('panel'))
+    // }
+    // </script>
+    <script type="text/babel" src="js/reactjs.jsx"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Custom Theme Scripts -->

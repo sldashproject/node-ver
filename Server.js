@@ -122,14 +122,14 @@ var connection = mysql.createConnection({
 app.post('/addList', function(req, res){
     var name = req.body.name;
     var email = req.body.email;
-    console.log(name+": "+email);
     var query = "insert into test(name,email) values('"+name+"','"+email+"')";
+    console.log(query);
     var implementation = connection.query(query,function(err,result){
         if (err) {
             console.error(err);
             throw err;
         }
-        res.redirect('Angular1.6.html');
+        res.status(200).send('success');
     });
 });
 
@@ -143,6 +143,36 @@ app.get('/getList', function(req, res) {
         }
         res.setHeader('Access-Control-Allow-Methods', 'GET');
         res.json(rows);
+    });
+});
+
+// update list to db
+app.post('/updateList', function(req, res) {
+    var name = req.body.name;
+    var email = req.body.email;
+    var id = req.body.id;
+    var query = "update test set name='"+name+"', email='"+email+"' where id="+id;
+    console.log(query);
+    var implementation = connection.query(query,function(err, rows) {
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        res.status(200).send('success');
+    });
+});
+
+// delete list from db
+app.post('/deleteList', function(req, res) {
+    var id = req.body.id;
+    var query = "delete from test where id="+id;
+    console.log(query);
+    var implementation = connection.query(query,function(err, rows) {
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        res.status(200).send('success');
     });
 });
 

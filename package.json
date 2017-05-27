@@ -14,7 +14,9 @@
     "socket.io": "^2.0.1"
   },
   "main": "Server.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-plugin-transform-react-jsx": "^6.24.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

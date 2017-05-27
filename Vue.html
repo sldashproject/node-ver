@@ -56,9 +56,9 @@
                             </li>
                             <li><a><i class="fa fa-chrome" aria-hidden="true"></i> View Model <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="chartjs.html">AngularJS-1.6</a></li>
-                                    <li><a href="chartjs.html">ReactJS</a></li>
-                                    <li><a href="chartjs.html">VueJS</a></li>
+                                    <li><a href="Angular1.6.html">AngularJS-1.6</a></li>
+                                    <li><a href="reactjs.html">ReactJS</a></li>
+                                    <li><a href="Vue.html">VueJS</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -170,7 +170,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Vue-2.3.3 <small style="cursor:pointer" v-on:click="ViewPage(1)">Inquiry</small> <small style="cursor:pointer" v-on:click="ViewPage(2)">Add Data</small></h3>
+                        <h3>Vue-2.3.3</h3>
                     </div>
 
                     <div class="title_right">
@@ -186,28 +186,58 @@
                 </div>
                 
                 <div class="clearfix"></div>
-                <div class="row" v-if="configView == 1">
+                <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>DB-inquiry</h2>
+                                <h2>CRUD example</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                             <br />
+                                <form id="db-form" data-parsley-validate class="form-horizontal form-label-left">
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" required="required" id="naming" name="name" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="email" id="emails" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+            						    <button class="btn btn-primary" type="reset">Reset</button>
+                                        <button class="btn btn-success" v-on:click="addList()">Add</button>
+                                    </div>
+                                </div>
+
+                                </form>
+                                
+                                <div class="ln_solid"></div>
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Modify</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr v-for="data in inquiryData">
-                                            <td>{{data.id}}</td>
-                                            <td>{{data.name}}</td>
-                                            <td>{{data.email}}</td>
+                                    <tbody v-for="(data, index) in inquiryData">
+                                        <tr>
+                                            <td style="padding-top: 17px">{{index+1}}</td>
+                                            <td style="padding-top: 17px" v-bind:id="'name--'+index">{{data.name}}</td>
+                                            <td style="padding-top: 17px" v-bind:id="'email--'+index">{{data.email}}</td>
+                                            <td><button v-bind:id="'modify--'+index" class="btn btn-warning" type="button" title="Modify" v-on:click="Modifying(index,data.id,data.name,data.email)"><i class="fa fa-wrench"></i></button></td>
+                                            <td><button v-bind:id="'delete--'+index" class="btn btn-danger" type="button" title="Delete" v-on:click="Deleting(index,data.id)"><i class="fa fa-trash"></i></button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -216,56 +246,6 @@
                     </div>
                 </div>
             
-            
-                <div class="clearfix"></div>
-                <div class="row" v-if="configView == 2">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>TodoList</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                            <br />
-                            <div>
-                                <form id="todoFrom" name="todoForm" ng-submit="add(newTodoTitle)">
-                                    <div class="input-group">
-                                        <input id="todoName" class="form-control col-md-7 col-xs-12" type="text" ng-model="newTodoTitle" placeholder="Input new todo" minlength="3" autofocus>
-                                        <span class="input-group-btn">
-                        					<button class="btn btn-success" type="submit">Add</button>
-                        				</span>	
-                                    </div>
-                                    <div ng-show="todoForm.$dirty && todoForm.$invalid">
-                        				<div class="alert alert-warning" role="alert">more than 3 letters</div>
-                        			</div>
-                                </form><br>
-                                <ul class="list-unstyled">
-                        		  <li ng-repeat="todo in todos | filter:statusFilter">
-                        		      <date>createdAt: </date>
-                        			  <div class="input-group">
-                        				<span class="input-group-addon">
-                        				  <input type="checkbox" ng-model="todo.completed">
-                        				</span>
-                        				<input type="text" class="form-control" ng-model="todo.title">
-                        				<span class="input-group-btn">
-                        				  <button class="btn btn-danger" type="button" ng-click="remove(todo)">Delete</button>
-                        				</span>
-                        			  </div>
-                        			  <br>
-                        		  </li>
-                        		</ul>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button class="btn btn-primary" ng-click="statusFilter={completed:true}">Completed</button>
-            						    <button class="btn btn-primary" ng-click="statusFilter={completed:false}">Active</button>
-                                        <button class="btn btn-primary" ng-click="statusFilter={}">All</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         
