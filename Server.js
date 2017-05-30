@@ -1,11 +1,9 @@
 var http = require("http");
-var https = require("https");
 var express = require("express");
 var fs = require("fs");
 var path = require("path");
 var mysql = require("mysql");
 var bodyParser  = require('body-parser');
-var connection  = require('express-myconnection'); 
 var app = express();
 
 // folder setting for starting web page 
@@ -127,9 +125,11 @@ app.post('/addList', function(req, res){
     var implementation = connection.query(query,function(err,result){
         if (err) {
             console.error(err);
-            throw err;
         }
-        res.status(200).send('success');
+        else 
+        {
+            res.status(200).send('success');
+        }
     });
 });
 
@@ -139,10 +139,11 @@ app.get('/getList', function(req, res) {
     var implementation = connection.query(query,function(err,rows){
         if (err) {
             console.error(err);
-            throw err;
         }
-        res.setHeader('Access-Control-Allow-Methods', 'GET');
-        res.json(rows);
+        else {
+            res.setHeader('Access-Control-Allow-Methods', 'GET');
+            res.json(rows);
+        }
     });
 });
 
@@ -156,9 +157,10 @@ app.post('/updateList', function(req, res) {
     var implementation = connection.query(query,function(err, rows) {
         if (err) {
             console.error(err);
-            throw err;
         }
-        res.status(200).send('success');
+        else {
+            res.status(200).send('success');
+        }
     });
 });
 
@@ -170,9 +172,10 @@ app.post('/deleteList', function(req, res) {
     var implementation = connection.query(query,function(err, rows) {
         if (err) {
             console.error(err);
-            throw err;
         }
-        res.status(200).send('success');
+        else {
+            res.status(200).send('success');
+        }
     });
 });
 

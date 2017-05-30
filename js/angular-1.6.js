@@ -119,7 +119,29 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
 	    document.getElementById("todoName").value = "";
     }
     // TodoList end
-  
+    
+    
+    
+    // CRUD with Mysql : Start
+    
+    $scope.clickedUser = {};
+    $scope.clickedUserId = 0;
+    $scope.clickedIndex = 0;
+    $scope.message = "";
+    
+    $scope.selectUser = function(index,user){
+        console.log("selectUser index:"+index);
+        console.log("selectUser userId:"+user.id);
+        $scope.clickedUser = user;
+        $scope.clickedUserId = user.id;
+        $scope.clickedIndex = index;
+    };
+    
+    $scope.clearMessage = function(){
+        $scope.message = "";
+    };
+    
+    // displaying member
     $.ajax({
         url: 'https://dashboard-node-ver-sldashproject.c9users.io/getList',
         complete: function(data) {
@@ -127,6 +149,68 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
             $scope.selectDB = data.responseJSON;
         }
     });
+    
+    // adding member
+    $scope.saveUser = function(){
+      var input_data = {name: $('#addName').val(), email: $('#addEmail').val()};
+      $.ajax({
+        url: 'https://dashboard-node-ver-sldashproject.c9users.io/addList',
+        method: 'POST',
+        dataType: 'text',
+        data: input_data,
+        complete: function(data) {
+            console.log(data);
+        }
+      });
+      var last_num = $scope.selectDB.length;
+      var last_id = $scope.selectDB[last_num-1].id;
+      console.log("saveUser last_id:"+last_id);
+      var real_input_data = {id: last_id+1, name: $('#addName').val(), email: $('#addEmail').val()};
+      $scope.selectDB.push(real_input_data);
+      $scope.message = "New User Added Successfully";
+    };
+    
+    // deleting member
+    $scope.removeMember = function(){
+        console.log("$scope.clickedIndex : "+$scope.clickedIndex);
+        $.ajax({
+            url: 'https://dashboard-node-ver-sldashproject.c9users.io/deleteList',
+            method: 'POST',
+            dataType: 'text',
+            data: {id:$scope.clickedUserId},
+            complete: function(data) {
+                console.log(data);
+            }
+        });
+        $scope.selectDB.splice($scope.selectDB.indexOf($scope.clickedIndex),1);
+        $scope.message = "Deleted Successfully";
+    }
+
+    // updating member
+    $scope.updateUser = function(){
+        var userId = $scope.clickedUser.id;
+        var userName = $scope.clickedUser.name;
+        var email = $scope.clickedUser.email;
+        console.log("updateUser userId : "+userId);
+        console.log("updateUser userName : "+userName);
+        console.log("updateUser email : "+email);
+        
+        var input_data = {name: userName, email: email, id:userId};
+        $.ajax({
+            url: 'https://dashboard-node-ver-sldashproject.c9users.io/updateList',
+            method: 'POST',
+            dataType: 'text',
+            data: input_data,
+            complete: function(data) {
+                console.log(data);
+            }
+        });
+        //$scope.selectDB.splice($scope.selectDB.indexOf($scope.clickedIndex),1);
+        $scope.message = "Updated Successfully";
+    }
+    
+    // CRUD with Mysql : End
+    
 }]);
 
 //restrict only number
