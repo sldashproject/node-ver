@@ -24,25 +24,25 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
             case 1: 
                 $scope.modelView = true;
                 $scope.todoView = false;
-                $scope.dbtestView = false;
+                //$scope.dbtestView = false;
                 $scope.dbselectView = false;
                 break;
             case 2:
                 $scope.modelView = false;
                 $scope.todoView = true;
-                $scope.dbtestView = false;
+                //$scope.dbtestView = false;
                 $scope.dbselectView = false;
                 break;
             case 3:
                 $scope.modelView = false;
                 $scope.todoView = false;
-                $scope.dbtestView = true;
+                //$scope.dbtestView = true;
                 $scope.dbselectView = false;
                 break;
             case 4:
                 $scope.modelView = false;
                 $scope.todoView = false;
-                $scope.dbtestView = false;
+                //$scope.dbtestView = false;
                 $scope.dbselectView = true;
                 break;
         }
@@ -129,6 +129,32 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.clickedIndex = 0;
     $scope.message = "";
     
+    // displaying member
+    var refresh = function(){
+        $.ajax({
+            url: 'https://dashboard-node-ver-sldashproject.c9users.io/getList',
+            complete: function(data) {
+                console.log(data);
+                $scope.selectDB = data.responseJSON;
+            }
+        });
+    }
+    
+    refresh();
+    
+    $scope.cancelEdit = function(){
+        console.log("cancelEdit");
+        refresh();
+    }
+    
+    $scope.selectUser = function(index,user){
+        console.log("selectUser index:"+index);
+        console.log("selectUser userId:"+user.id);
+        $scope.clickedUser = user;
+        $scope.clickedUserId = user.id;
+        $scope.clickedIndex = index;
+    };
+    
     $scope.selectUser = function(index,user){
         console.log("selectUser index:"+index);
         console.log("selectUser userId:"+user.id);
@@ -140,16 +166,7 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.clearMessage = function(){
         $scope.message = "";
     };
-    
-    // displaying member
-    $.ajax({
-        url: 'https://dashboard-node-ver-sldashproject.c9users.io/getList',
-        complete: function(data) {
-            console.log(data);
-            $scope.selectDB = data.responseJSON;
-        }
-    });
-    
+
     // adding member
     $scope.saveUser = function(){
       var input_data = {name: $('#addName').val(), email: $('#addEmail').val()};
@@ -205,7 +222,6 @@ myApp.controller('MainCtrl', ['$scope', function ($scope) {
                 console.log(data);
             }
         });
-        //$scope.selectDB.splice($scope.selectDB.indexOf($scope.clickedIndex),1);
         $scope.message = "Updated Successfully";
     }
     

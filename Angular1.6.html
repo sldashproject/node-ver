@@ -173,8 +173,8 @@
                         <h3>Angular-1.6 
                             <small style="cursor:pointer" ng-click="ViewPage(1)">Model</small>
                             <small style="cursor:pointer" ng-click="ViewPage(2)">TodoList</small>
-                            <small style="cursor:pointer" ng-click="ViewPage(3)">DBtest</small>
-                            <small style="cursor:pointer" ng-click="ViewPage(4)">DB-Select</small>
+                            <!--<small style="cursor:pointer" ng-click="ViewPage(3)">DBtest</small>-->
+                            <small style="cursor:pointer" ng-click="ViewPage(4)">DB Model</small>
                         </h3>
                     </div>
 
@@ -324,46 +324,46 @@
                     </div>
                 </div>
                 
-                <div class="clearfix"></div>
-                <div class="row" ng-show="dbtestView">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>db-tableCreate</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                            <br />
-                                <form id="db-form" data-parsley-validate class="form-horizontal form-label-left" method="post" action="/addList">
+                <!--<div class="clearfix"></div>-->
+                <!--<div class="row" ng-show="dbtestView">-->
+                <!--    <div class="col-md-12 col-sm-12 col-xs-12">-->
+                <!--        <div class="x_panel">-->
+                <!--            <div class="x_title">-->
+                <!--                <h2>db-tableCreate</h2>-->
+                <!--                <div class="clearfix"></div>-->
+                <!--            </div>-->
+                <!--            <div class="x_content">-->
+                <!--            <br />-->
+                <!--                <form id="db-form" data-parsley-validate class="form-horizontal form-label-left" method="post" action="/addList">-->
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" required="required" name="name" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="email" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                </div>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button class="btn btn-primary" type="button">Cancel</button>
-            						    <button class="btn btn-primary" type="reset">Reset</button>
-                                        <button type="submit" class="btn btn-success">Submit</button>
-                                    </div>
-                                </div>
+                <!--                <div class="form-group">-->
+                <!--                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>-->
+                <!--                    </label>-->
+                <!--                    <div class="col-md-6 col-sm-6 col-xs-12">-->
+                <!--                        <input type="text" required="required" name="name" class="form-control col-md-7 col-xs-12">-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="form-group">-->
+                <!--                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>-->
+                <!--                    </label>-->
+                <!--                    <div class="col-md-6 col-sm-6 col-xs-12">-->
+                <!--                        <input type="text" name="email" required="required" class="form-control col-md-7 col-xs-12">-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="ln_solid"></div>-->
+                <!--                <div class="form-group">-->
+                <!--                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">-->
+                <!--                        <button class="btn btn-primary" type="button">Cancel</button>-->
+            				<!--		    <button class="btn btn-primary" type="reset">Reset</button>-->
+                <!--                        <button type="submit" class="btn btn-success">Submit</button>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--                </form>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
                 
                 
                 
@@ -376,9 +376,8 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <hr>
                                 <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">Add New</button>
-                                <h2>All Members</h2>
+                                <h2>All Members (CRUD Example)</h2>
                                 <div class="clearfix"></div>
                                 <div class="alert alert-info" ng-if="message">
                                     <a href="#" class="close" ng-click="clearMessage()">&times;</a>
@@ -487,7 +486,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelEdit()">Close</button>
                                 </div>
                             </div>
                         </div>
